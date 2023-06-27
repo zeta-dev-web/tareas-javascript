@@ -14,7 +14,9 @@ let palabra = "marmota"
 // 1 - Pasarla a mayuscula
 console.log(palabra.toUpperCase());
 // 2 - Capitalizar la palabra (Marmota)
+// forma 1
 let Marmota = (palabra.at(0).toUpperCase() + palabra.substring(1));
 console.log(Marmota)
+// forma 2
 let Marmota2 = (`${palabra.at(0).toUpperCase()}${palabra.substring(1)}`);
 console.log(Marmota2)
