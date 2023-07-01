@@ -1,5 +1,5 @@
 // 1.- Escribe un programa de una sola línea que haga que aparezca en la pantalla un alert que diga “un mensaje”.
-console.warn(`Un mensaje 🤷‍♂️`);
+console.warn(`🦾 BIENVENIDO, COMENZEMOS ➡️`);
 // 2.- Escribe un programa de una sola línea que escriba en la pantalla un texto que diga «Hello World» (document.write).
 document.write(`Hello World 🙋‍♂️🌎`)
 // 3.- Escribe un programa de una sola línea que escriba en la pantalla el resultado de sumar 3 + 5.
@@ -43,38 +43,38 @@ else{
 console.log (`Lo siento 😑 ${numDivisible} no es divisible en 2️⃣`)
 }
 }
-// 9.- Escribe un programa que pida una frase y escriba las vocales que aparecen
-let fraseIngresada =(prompt(`Ingrese una frase por favor 🙂`))
-let fraseEnMinusculas = (fraseIngresada.toLowerCase())
-let vocalesValidas = ("a,e,i,o,u,á,é,í,ó,ú")
 
 // 10.- Escribe un programa que pida un número y nos diga si es divisible por 2, 3, 5 o 7 (sólo hay que comprobar si lo es por uno de los cuatro)
-let numeroDiv = parseInt(prompt`Ingrese un Número y verificaremos si es divisible en 2, 3, 5 o 7`)
-if (numeroDiv % 2 == 0) {
-console.log(`El número ingresado es divisible en 2`)
+let numeroDiv = parseInt(prompt`🔹Ingrese un Número y verificaremos si es divisible en 2, 3, 5 o 7 🔹`)
+if (isNaN(numeroDiv)) {
+console.error(`No ingresaste un número 🙄`);}
+ else {
+if (numeroDiv % 2 == 0 || numeroDiv % 3 == 0 || numeroDiv % 5 == 0 || numeroDiv % 7 == 0)  {
+console.log(`Buenisimo!👌 el número ingresado ${numeroDiv} es divisible en 2️⃣ 3️⃣ 5️⃣ o 7️⃣ `)
 } 
 else {
-if (numeroDiv % 3 == 0) {
-console.log(`El número ingresado es divisible en 3`)
+console.log(`Lo Lamento, el número ingresado ${numeroDiv} no es divisible en 2️⃣ 3️⃣ 5️⃣o7️⃣ `)
 }    
-else{
-    if (numeroDiv % 5 == 0) {
-console.log(`El número ingresado es divisible en 5`)
-}
-if (numeroDiv % 7 == 0) {
-console.log(`El número ingresado es divisible en 7`)
-}
-}
-}
+ }
 // 11.- Añadir al ejercicio anterior que nos diga por cuál de los cuatro es divisible (hay que decir todos por los que es divisible)
+if (numeroDiv % 2 == 0 || numeroDiv % 3 == 0 || numeroDiv % 5 == 0 || numeroDiv % 7 == 0)
+{alert(`✔️ ahora verificaremos en cuales de todos ellos es divisible`)}
+else {;    
+}
+let divisibles= []
 
 if (numeroDiv % 2 == 0) {
-    if (numeroDiv % 3 == 0) {
-        if (numeroDiv % 5 == 0) {
-            if (numeroDiv % 7 == 0)
-        }
-    }
+  divisibles[divisibles.length] = 2;
 }
-else{
-
+if (numeroDiv % 3 == 0) {
+  divisibles[divisibles.length] = 3;
+}
+if (numeroDiv % 5 == 0) {
+  divisibles[divisibles.length] = 5;
+}
+if (numeroDiv % 7 == 0) {
+    divisibles[divisibles.length] = 7;
+} 
+if (divisibles.length > 0) {
+console.log(`El número es divisble en ${divisibles}🤯`)
 }
