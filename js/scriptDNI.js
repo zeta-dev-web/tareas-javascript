@@ -3,9 +3,9 @@ let resto = 0
 let letraDni = ""
 
 while (true){
-numeroDni = parseInt(prompt(`Ingresar el numero de DNI`))
-if (isNaN(numeroDni) || numeroDni > 99999999 || numeroDni <= 0) {
-alert(`Debe ingresar un numero valido entre 0 y 99999999`)
+numeroDni = (prompt(`Ingresar el numero de DNI sin puntos (Ejemplo: 24786412)`))
+if (numeroDni.indexOf(".")!== -1 || isNaN(numeroDni) || numeroDni > 99999999 || numeroDni <= 0) {
+alert(`⛔Error: Debe ingresar un número válido entre 0 y 99999999 sin puntos`)
 }
 else{
 resto = parseInt(numeroDni % 23)
