@@ -7,6 +7,8 @@ let auto = {
     encendido: false,
     encenderApagar : function () {
         this.encendido=!this.encendido
+        if(this.encendido=true){console.log('El auto fue encendido')}
+        else{console.log('El auto fue apagado')}
     }
 }
 // Escribe una clase que permita crear distintos objetos “rectángulos”, con las propiedades de alto y ancho, 
@@ -117,8 +119,6 @@ class Persona {
 // https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Math/random#obtener_un_n%C3%BAmero_entero_entre_dos_valores_determinados
 
 generarDNI(){
-    let min = Math.ceil(11111111);
-  let max = Math.floor(99999999);
-  return Math.floor(Math.random() * (max - min) + min); 
+  return Math.floor(Math.random() * (99999999 - 10000000) + 10000000); 
   }
     }
