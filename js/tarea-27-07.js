@@ -1,16 +1,15 @@
 // Crea un objeto llamado auto que tenga algunas características como el color, marca, modelo 
 // y si está encendido o apagado. Crea los métodos necesarios para permitir encender y apagar el auto.
 let auto = {
-    color: "rojo",
-    marca: "volkswagen",
-    modelo: 2017,
-    encendido: false,
-    encenderApagar : function () {
-        this.encendido=!this.encendido
-        if(this.encendido=true){console.log('El auto fue encendido')}
-        else{console.log('El auto fue apagado')}
-    }
-}
+        color: "rojo",
+            marca: "volkswagen",
+                modelo: 2017,
+                    encendido: false,
+                        encenderApagar : function () {
+                                this.encendido=!this.encendido
+                                        if (this.encendido== true){console.log('El Auto fue encendido')} else {console.log('El Auto fue Apagado')}
+                                            }
+                                            }
 // Escribe una clase que permita crear distintos objetos “rectángulos”, con las propiedades de alto y ancho, 
 // mas los métodos necesarios para modificar y mostrar sus propiedades, calcular el perímetro y el área
 
@@ -56,7 +55,7 @@ imprimirDatos(){
 }
 }
 
-let productos = [new Productos("001","azucar","100"), new Productos("002", "yerba", "$150"), new Productos("003","galletas","$300")]
+let productos = [new Productos("001","azucar","$100"), new Productos("002", "yerba", "$150"), new Productos("003","galletas","$300")]
 
  productos.forEach((producto) => {
   producto.imprimirDatos();
@@ -89,7 +88,7 @@ class Persona {
             console.log(`La persona pertenece a la Generacion: "Baby Boom" y su rasgo caracteristico es la Ambicion 🤑`)
             break;
     case this.nacimiento >= 1969 && this.nacimiento <= 1980:
-            console.log(`La persona pertenece a la Generacion: "X" y su rasgo caracteristico es la Obesion por el éxito 😎`)
+            console.log(`La persona pertenece a la Generacion: "X" y su rasgo caracteristico es la Obsesion por el éxito 😎`)
             break;
     case this.nacimiento >= 1981 && this.nacimiento <= 1993:
             console.log(`La persona pertenece a la Generacion: "X" y su rasgo caracteristico es la Frustracion 🥴`)
