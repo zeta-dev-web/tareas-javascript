@@ -20,8 +20,7 @@ class Rectangulo {
     this.ancho = ancho;
 }
 mostrarProp() {
-console.log(`El rectangulo tiene de alto = ${this.alto} y de ancho = ${this.ancho}`)
-}
+3}
 modProp(alto,ancho) {
 this.alto = alto
 this.ancho = ancho
@@ -53,7 +52,7 @@ class Productos {
     this.precio = precio;    
     }
 imprimirDatos(){
-    document.write("<ul><li>CODIGO:"+ this.codigo+"</li><li>CODIGO:"+ this.nombre+"</li><li>CODIGO:"+ this.precio+"</li></ul>")
+    document.write("<ul><li>CODIGO:"+ this.codigo+"</li><li>NOMBRE:"+ this.nombre+"</li><li>PRECIO:"+ this.precio+"</li></ul>")
 }
 }
 
@@ -119,6 +118,6 @@ class Persona {
 // https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Math/random#obtener_un_n%C3%BAmero_entero_entre_dos_valores_determinados
 
 generarDNI(){
-  return Math.floor(Math.random() * (99999999 - 10000000) + 10000000); 
+  return Math.floor(Math.random() * (99999999 - 10000000 + 1) + 10000000); 
   }
     }
