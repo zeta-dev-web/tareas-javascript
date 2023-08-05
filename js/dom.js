@@ -26,7 +26,7 @@ let clics = 0
 
 const countClics = ()=>
 {
-parr2.classList = "text-align-center bg-warning"     
+parr2.classList = "text-align-center bg-info"     
 clics++
 parr2.innerText = "Hiciste "+ clics +" clics en el boton 2" 
 }
@@ -40,6 +40,16 @@ const changeStyle = () => {
 else {parr3.classList="text-align-center bg-dark text-white"}
 }
 
+//funcion que hace que cambie el estilo al hacer clic en dispositivos moviles
+const changeStyleClic = () => {
+if (window.innerWidth <= 820){
+    if (parr3.classList=="text-align-center bg-dark text-white") {
+ parr3.classList="text-align-center"       
+    }
+else {parr3.classList="text-align-center bg-dark text-white"}
+}
+}
+
 // 4. Reloj digital:
 let button3=document.querySelector("#button3");
 let parr4= document.querySelector("#parr4");
@@ -50,6 +60,7 @@ const horaActual = () => { if (!relojActive) {
     let date = "";
     intervalo = setInterval(() => {
       date = new Date();
+      parr4.classList ="bg-warning text-dark border border-secondary border-4"
       parr4.innerText = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
   }, 1000);    
 relojActive = true
@@ -57,6 +68,7 @@ button3.innerText="DETENER"
 }else{
 clearInterval(intervalo);
 relojActive=false
+parr4.classList =""
 parr4.innerText = "🕕"
 button3.innerText="INICIAR"
 }};
