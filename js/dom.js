@@ -213,6 +213,8 @@ else {
             
 }
 
+// GALERIA DE IMAGEN CON FORMULARIO DE CARGA
+
 // funcion que escucha el boton de la imagen y ejecuta el modal
 let listaImagenes = JSON.parse(localStorage.getItem("imagenes")) || [];
 
