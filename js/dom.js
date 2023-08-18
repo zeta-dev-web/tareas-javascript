@@ -74,61 +74,84 @@ button3.innerText="INICIAR"
 }};
 
 // 5. Lista de tareas:
-class Lista {
-    constructor(producto1, producto2 = "", producto3 = "", producto4 ="", producto5 = ""){
-        this.producto1 = producto1;
-        this.producto2 = producto2;
-        this.producto3 = producto3;
-        this.producto4 = producto4;
-        this.producto5 = producto5;
+const myModal = new bootstrap.Modal(document.getElementById('updateModal'))
+let listaProductos= JSON.parse(localStorage.getItem("productos")) || [];
+
+class Productos {
+    constructor(product){
+        this.producto = product;
     }
 }
 
-const listaProductos= []
-
-let producto1 = document.querySelector("#input1")
-let producto2 =document.querySelector("#input2")
-let producto3 =document.querySelector("#input3")
-let producto4 =document.querySelector("#input4")
-let producto5 =document.querySelector("#input5")
+let producto = document.querySelector("#input1")
 
 const guardarProductos= (event)=>{
     event.preventDefault();
-    const lista = new Lista(
-    producto1.value, 
-    producto2.value,
-    producto3.value,
-    producto4.value,
-    producto5.value,  
+    const productos = new Productos(
+    producto.value  
     )
-listaProductos.push(lista)
+listaProductos.push(productos)
   document.querySelector("form").reset();
-  producto1.focus();
-
+  producto.focus();
+  localStorage.setItem("productos", JSON.stringify(listaProductos));
 }
 
 let button5 = document.querySelector("#button5")
 let parr6 = document.querySelector("#parr6")
 let listActive = false
 
-const mostrarLista = ()=>{ if (listActive==false) {
- button5.innerText= "OCULTAR LISTAS"  
- const ul = document.createElement('ul');
- listaProductos.forEach(producto => {
-      const li = document.createElement('li');
-      li.innerHTML = `Producto 1: ${producto.producto1}, Producto 2: ${producto.producto2}, Producto 3: ${producto.producto3}, Producto 4: ${producto.producto4}, Producto 5: ${producto.producto5}`;
-      ul.appendChild(li);
-      parr6.classList="text-danger"
-      parr6.innerText="LISTAS DE COMPRAS"
-      parr6.appendChild(ul);
+const mostrarLista = () => {
+    const ul = document.createElement('ul');
+    
+    listaProductos.forEach((producto, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `Producto ${index + 1}: ${producto.producto} <button class="btn btn-danger btn-sm mb-1 ms-1 me-1" onclick="eliminarProducto(${index})">X</button><button class="btn btn-warning btn-sm mb-1" onclick="mostrarModal(${index})">M</button>`;
+        ul.appendChild(li);
     });
-listActive = true
-} 
-else {   
-    button5.innerText= "MOSTRAR LISTAS" 
-parr6.innerText = ""
-listActive = false}
-}
+    
+    parr6.innerHTML = ""; // Limpiar el contenido anterior
+    parr6.classList.add("text-danger");
+    parr6.innerText = "LISTAS DE COMPRAS";
+    parr6.appendChild(ul);
+};
+
+button5.addEventListener("click", () => {
+    if (!listActive) {
+        button5.innerText = "OCULTAR LISTAS";
+        mostrarLista();
+        listActive = true;
+    } else {
+        button5.innerText = "MOSTRAR LISTA DE PRODUCTOS";
+        parr6.innerHTML = "";
+        listActive = false;
+    }
+});
+
+const eliminarProducto = (index) => {
+    listaProductos.splice(index, 1);
+    localStorage.setItem("productos", JSON.stringify(listaProductos));
+    mostrarLista(); // Actualizar la lista mostrada
+};
+
+// MOSTRAR MODAL
+
+let posicionProducto = null
+
+const mostrarModal = (index) => {
+  document.querySelector("#inputModal1").value = listaProductos[index].producto; //TRAIGO EL NOMBRE DEL PRODUCTO DEL ARREGLO Y LO MUESTRO EN EL FORMULARIO
+  posicionProducto = index; //GUARDO LA POSICION DEL PRODUCTO EN UNA VARIABLE
+  myModal.show(); //MUESTRO EL MODAL
+};
+
+const actualizarProducto = (event) => {
+ event.preventDefault();//DETENGO EL EVENTO DEL FORMULARIO
+listaProductos[posicionProducto].producto =  document.getElementById("inputModal1").value; // TOMO EL VALOR DEL FORMULARIO Y LO GUARDO
+        localStorage.setItem("productos", JSON.stringify(listaProductos)); //ACTUALIZO LA BASE DE DATOS
+          myModal.hide() // CIERRO MODAL;
+        mostrarLista(); // ACTUALIZO LA LISTA
+    }
+;
+
 
 // Cambiar el tamaño de texto:
 let parr7 = document.querySelector("#parr7")
@@ -190,5 +213,147 @@ else {
             
 }
 
+// funcion que escucha el boton de la imagen y ejecuta el modal
+let listaImagenes = JSON.parse(localStorage.getItem("imagenes")) || [];
 
+const contenedor = document.querySelector("#contenedor");
 
+const modalimagenes = () => {
+  const buttonForm = document.getElementById('buttonform');
+  const modal = new bootstrap.Modal(document.getElementById('modalimagenes'));
+
+  buttonForm.addEventListener('click', () => {
+    modal.show();
+  });
+
+  const agregarImagenForm = document.getElementById('agregarImagenForm');
+  agregarImagenForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const url = document.getElementById('urlImagen').value;
+    const nombre = document.getElementById('nombreImagen').value;
+    const descripcion = document.getElementById('descripcionImagen').value;
+
+    const imagen = {
+      url: url,
+      nombre: nombre,
+      descripcion: descripcion
+    };
+
+    listaImagenes.push(imagen);
+    localStorage.setItem("imagenes", JSON.stringify(listaImagenes));
+
+    contenedor.innerHTML = "";
+    mostrarImagenes();
+
+    modal.hide();
+  });
+};
+
+const eliminarImagen = (index) => {
+  let confirmacion = confirm("¿Está seguro que desea eliminar la imagen?");
+  if (confirmacion) {
+    listaImagenes.splice(index, 1);
+    localStorage.setItem("imagenes", JSON.stringify(listaImagenes));
+   alert(`La imagen ha sido eliminada`);
+    contenedor.innerHTML = "";
+    mostrarImagenes();
+  }
+};
+
+const modImagen = (index) => {
+  const imagen = listaImagenes[index];
+
+  let modalTitle = document.getElementById('modalTitle');
+  let nombreImagenModal = document.getElementById('nombreImagenModal');
+  let descripcionImagenModal = document.getElementById('descripcionImagenModal');
+  let guardarCambiosButton = document.getElementById('guardarCambiosButton');
+
+  modalTitle.innerText = `Editar info de imagen: ${imagen.nombre}`;
+  nombreImagenModal.value = imagen.nombre;
+  descripcionImagenModal.value = imagen.descripcion;
+
+  const modal = new bootstrap.Modal(document.getElementById('modImgModal'));
+  modal.show();
+
+  guardarCambiosButton.addEventListener('click', () => {
+    let nuevoNombre = nombreImagenModal.value;
+    let nuevaDescripcion = descripcionImagenModal.value;
+
+    listaImagenes[index].nombre = nuevoNombre;
+    listaImagenes[index].descripcion = nuevaDescripcion;
+
+    localStorage.setItem("imagenes", JSON.stringify(listaImagenes));
+
+    contenedor.innerHTML = "";
+    mostrarImagenes();
+
+    modal.hide();
+  });
+};
+
+const mostrarImagenes = () => {
+  contenedor.innerHTML = ""; // Limpiar el contenedor antes de mostrar las imágenes
+
+  if (listaImagenes.length === 0) {
+    let mensajeVacio = document.createElement('p');
+    mensajeVacio.innerHTML= "<h3>No hay imágenes disponibles.</h3>";
+    contenedor.appendChild(mensajeVacio);
+  } else {
+    listaImagenes.forEach((imagen, index) => {
+      const card = document.createElement("div");
+      card.classList = "card col-12 me-3 mt-3 m-0 p-0";
+      card.style.width = "18rem";
+
+      const img = document.createElement('img');
+      img.src = imagen.url;
+      img.classList = "card-img-top";
+      img.alt = imagen.nombre;
+
+      const cardBody = document.createElement('div');
+      cardBody.classList = "card-body d-flex flex-column"; // Quitamos justify-content-between
+
+      const cardTitle = document.createElement('h5');
+      cardTitle.classList = "card-title";
+      cardTitle.textContent = imagen.nombre;
+
+      const cardDescription = document.createElement('p');
+      cardDescription.classList = "card-text";
+      cardDescription.textContent = imagen.descripcion;
+
+      const buttonContainer = document.createElement('div');
+      buttonContainer.classList = "d-flex justify-content-between";
+
+      const deleteButton = document.createElement('button');
+      deleteButton.classList = "btn btn-danger ms-1 mb-1";
+      deleteButton.innerText = "Eliminar";
+      deleteButton.addEventListener("click", () => {
+        eliminarImagen(index);
+      });
+
+      const modifyButton = document.createElement('button');
+      modifyButton.classList = "btn btn-primary me-1 mb-1";
+      modifyButton.innerText = "Modificar";
+      modifyButton.addEventListener("click", () => {
+        modImagen(index);
+      });
+
+      buttonContainer.appendChild(deleteButton);
+      buttonContainer.appendChild(modifyButton);
+
+      card.appendChild(img);
+      card.appendChild(cardBody);
+      card.appendChild(buttonContainer);
+
+      cardBody.appendChild(cardTitle);
+      cardBody.appendChild(cardDescription);
+
+      contenedor.appendChild(card);
+    });
+  }
+};
+
+window.onload = () => {
+  modalimagenes();
+  mostrarImagenes();
+};

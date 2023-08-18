@@ -14,7 +14,7 @@
   </head>
   <body>
     <header></header>
-    <main>
+    <main class="container m-0 p-0">
       <div class="container">
         <h1>EJERCICIOS DOM / BOM</h1>
         <div class="row my-3">
@@ -87,40 +87,15 @@
               id="parr5"
               class="d-flex text-align-center bg-danger text-white justify-content-center"
             >
-              Agregue los elementos a su lista de compra, puede crear varias
-              listas y guardarlas
+              Agregue los elementos a su lista de compra
             </h6>
             <div class="col-6">
               <form onsubmit="guardarDatos(event)">
                 <div class="mb-3">
                   <label for="input1" class="form-label text-danger"
-                    >Producto N° 1</label
+                    >Producto</label
                   >
                   <input type="text" class="form-control" id="input1" />
-                </div>
-                <div class="mb-3">
-                  <label for="input2" class="form-label text-danger"
-                    >Producto N° 2</label
-                  >
-                  <input type="email" class="form-control" id="input2" />
-                </div>
-                <div class="mb-3">
-                  <label for="input3" class="form-label text-danger"
-                    >Producto N° 3</label
-                  >
-                  <input type="text" class="form-control" id="input3" />
-                </div>
-                <div class="mb-3">
-                  <label for="input4" class="form-label text-danger"
-                    >Producto N° 4</label
-                  >
-                  <input type="text" class="form-control" id="input4" />
-                </div>
-                <div class="mb-3">
-                  <label for="input5" class="form-label text-danger"
-                    >Producto N° 5</label
-                  >
-                  <input type="text" class="form-control" id="input5" />
                 </div>
                 <div class="mb-3 d-flex justify-content-end">
                   <button
@@ -128,7 +103,7 @@
                     class="btn btn-outline-danger"
                     onclick="guardarProductos(event)"
                   >
-                    Guardar Lista
+                    Guardar Producto
                   </button>
                 </div>
               </form>
@@ -174,10 +149,196 @@
               </button>
             </div>
           </div>
+          <!-- boton para ingresar imagenes responsive-->
+          <div class="d-grid gap-2 mx-auto col-xs-12 col-sm-6 col-md-4">
+            <button id="buttonform" class="btn btn-primary" type="button">
+              AGREGAR IMAGEN
+            </button>
+          </div>
+          <div id="contenedor" class="container d-flex p-0 row m-1">
+            <!-- AQUI VAN LAS IMAGENES -->
+          </div>
         </div>
       </div>
     </main>
     <footer></footer>
+    <div
+      class="modal fade"
+      id="updateModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="updateModalLabel">
+              Modificar Producto
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form onsubmit="actualizarProducto(event)">
+              <div class="mb-3">
+                <label for="inputModal1" class="form-label">Producto</label>
+                <input type="text" class="form-control" id="inputModal1" />
+              </div>
+              <div class="mb-3 d-flex justify-content-end">
+                <button class="btn btn-warning">Guardar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal para ingresar imagen-->
+    <div
+      class="modal fade"
+      id="modalimagenes"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Agregar Imagen</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="agregarImagenForm">
+              <div class="mb-3">
+                <label for="urlImagen" class="form-label"
+                  >URL de la Imagen</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="urlImagen"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="nombreImagen" class="form-label"
+                  >Titulo de la Imagen</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nombreImagen"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="descripcionImagen" class="form-label"
+                  >Descripción de la Imagen (Minimo 20 caracteres)</label
+                >
+                <textarea
+                  class="form-control"
+                  id="descripcionImagen"
+                  rows="2"
+                  minlength="20"
+                  required
+                  style="resize: none"
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+            <button
+              type="submit"
+              form="agregarImagenForm"
+              class="btn btn-primary"
+            >
+              Guardar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal para modificar imagen -->
+    <div
+      class="modal fade"
+      id="modImgModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle">Editar info de imagen</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="nombreImagenModal" class="form-label"
+                  >Titulo de la Imagen</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nombreImagenModal"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="descripcionImagenModal" class="form-label"
+                  >Descripción de la Imagen</label
+                >
+                <textarea
+                  class="form-control"
+                  id="descripcionImagenModal"
+                  rows="2"
+                  minlength="20"
+                  required
+                  style="resize: none"
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="guardarCambiosButton"
+            >
+              Guardar Cambios
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
